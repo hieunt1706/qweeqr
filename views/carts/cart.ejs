@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <% if (carts.items) {
+            carts.items.map(x => { 
+        %>
+        <tr>
+            <th><%= x.item.name %></th>
+            <th><%= x.item.price %></th>
+            <th><img src="<%= x.imageSrc %>" alt="<%= x.item.name %> " width="75px"> </th>
+            <th class="d-flex">
+                <a href="/cart/reduce/<%= x.id %>" class="changeCart mx-3 btn btn-light">-</a>
+                <span id="<%= x.id %>"><span id="qty<%= x.id %>"><%= x.qty %></span></span>
+                <a href="/cart/increase/<%= x.id %>" class="changeCart mx-3 btn btn-light">+</a>
+            </th>
+            <th><%- include('../part/deleteForm', {url: `/cart/delete/${x.id}`}) %> </th>
+        </tr>
+        <% })} %>
+    </table>
+    <h1 id="total1"><span id="total2">Total: <%= carts.priceTotal %></span></h1>
+    <a href="/cart/checkout" class="btn btn-primary mx-3">Checkout</a>
+</div>

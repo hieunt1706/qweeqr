@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <%- include('../part/message') %>
+
+    <h1>List User</h1>
+    <table class="table table-hover mb-5">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Password</th>
+            <th>Delete</th>
+        </tr>
+        <% 
+        users.map(user => { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+                <td><%= user.password %></td>
+                <td><%- include ('../part/deleteForm', {url: `/user/${user._id}`}) %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h1>List Order</h1>
+    <table class="table table-hover mb-5">
+        <tr>
+            <th>User</th>
+            <th>Price</th>
+            <th>Address</th>
+        </tr>
+        <% 
+        orders.map(order => { %>
+            <tr>
+                <td><%= order.user %></td>
+                <td><%= order.cart.items.priceTotal %></td>
+                <td><%= order.address %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h1>List Categories</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>Category Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <% 
+        categories.map(cate => { %>
+            <tr>
+                <td><%= cate.name %></td>
+                <td><a href="/category/edit/<%= cate._id %>" class="btn btn-warning">Edit</a></td>
+                <td><%- include ('../part/deleteForm', {url: `/category/delete/${cate._id}`}) %></td>
+            </tr>
+        <% }) %>
+    </table>
+    <a type="button" class="btn btn-primary btn-lg mb-5" href="/category/add">Add Category</a>
+
+    <h1>List Products</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>Product Name</th>
+            <th>Information</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <td>Image</td>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <%
+        products.map(pro=>{ %>
+            <tr>
+                <td><%=  pro.name %></td>
+                <td><%=  pro.info %></td>
+                <td><%=  pro.price %></td>
+                <td><%=  pro.quantity %></td>
+                <td><img src="<%=  pro.imageSrc %>" alt="" width="100px"></td>
+                <td>
+                    <%
+                    if(pro.category){%>
+                        <%=  pro.category.name %>
+                    <%}
+                    %>
+                </td>
+                <td><a href="/product/edit/<%= pro._id %>" class="btn btn-warning">Edit</a></td>
+                <td> <%- include('../part/deleteForm',{url:`/product/delete/${pro._id}`}) %></td>
+            </tr>
+        <%})
+        %>
+        
+    </table>
+    <a type="button" class="btn btn-primary btn-lg" href="/product/add">Add New Product</a>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <a href="/" class="btn btn-primary mb-5">Home</a>
+    <div class="form-group">
+        
+            <h4>Address</h4>
+            <input required type="text" name="address" class="form-control" placeholder="Enter address" id="address">
+        
+            <% products.map(pdt => { %>
+                <div style="color: #333333">
+                    <%= pdt.item.name %>:(<%= pdt.qty %> )
+                    <span>--</span>
+                    <%= pdt.item.price * pdt.qty %> 
+                </div>    
+            <% }) %> 
+
+        <div class="total">
+            <h1>Tong Tien: <span id="total"><%= total %></span></h1>
+            
+                <span id="paypalbutton" style="text-align:center;width:100%;"></span>
+        </div>   
+    </div>
+</div>
+<script src="https://www.paypal.com/sdk/js?client-id=AT9PHTR_hrxkia4SkLyokNAVg-7GDYJ0wRWEwirsG1OGRKv336LQm8zmGGU40If29BBAwIu8x_t-drUC&disable-funding=credit,card"></script>
+
+<script>
+const root=location.protocol+"//"+location.host
+    
+    
+
+
+       paypal.Buttons({
+        style:{
+            color:"blue",
+            shape:"pill",
+        },
+        createOrder: function (data, actions) {
+          
+            var fee = document.getElementById("total").innerHTML;
+            fee = parseInt(fee);
+            
+            return actions.order.create({
+            purchase_units : [{
+                amount: {
+                    value: '0.1'
+                }
+            }]
+        });
+          
+        
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+            console.log(details)
+            const address = document.getElementById('address').value
+            console.log(address);
+            swal("Successful!", "continute!", "success").then(function(){
+              window.location.replace(root + "/cart/order/HCM"); 
+            })
+        })
+      },
+      onCancel: function (data) {
+        swal("Cancel", "continute!", "success")
+    },
+      }).render('#paypalbutton');
+</script>

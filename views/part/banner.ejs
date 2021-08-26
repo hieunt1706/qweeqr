@@ -1,0 +1,21 @@
+<div class="banner">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="cate_list">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                      Category
+                    </button>
+                    <% categories.map(cate => { %> 
+                        <a href="/category/<%= cate._id %>" class="list-group-item list-group-item-action"><%= cate.name %></a>
+                    <% }) %> 
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="img_banner">
+                <img class="img-fluid" src="http://organicfoods.com.vn/images/promo/1/banner-en-sale-40-80.png" alt="banner">
+            </div>
+        </div>
+    </div>
+</div>

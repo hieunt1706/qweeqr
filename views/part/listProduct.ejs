@@ -1,0 +1,19 @@
+<div class="row">
+    <% products.map(pro => { %>
+    <div class="col-sm-6 col-md-4">
+        <div class="product-card">
+            <div class="img">
+                <img src="<%= pro.imageSrc %>" alt="<%= pro.name %>">
+            </div>
+            <div class="content">
+                <h1><%= pro.name %></h1>
+                <h2><%= pro.price %></h2>
+                <a href="/cart/add/<%= pro._id %>" class="addCart btn btn-primary my-1 <% if (pro.quantity == 0) { %>
+                    disabled
+                    <% } %> " >Add to cart</a>
+                <a href="/product/<%= pro._id %> " class="btn btn-info">View</a>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>

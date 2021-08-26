@@ -1,0 +1,27 @@
+1. npm init -y
+2. npm start
+3. npm install --save-dev nodemon
+4. nodemon server
+5.   "scripts": {
+    "start":"node server",
+    "startDev":"nodemon server"
+     },
+     *nhan xet:
+     npm run start=node server => chay moi lan
+     npm run startDev=nodemon server => chay duy nhat 1 lan
+6. stop chương trình ctrl + c and go :y
+
+################################
+1. npm install express
+2. npm install ejs -save
+3. npm install mongoose -save
+4. npm install method-override
+5. npm install dotenv
+6. yarn add express-ejs-layouts
+
+heroku
+1. npm i -g heroku
+2. heroku login
+3. git add .
+4. git commit -am "make it better"
+5. git push heroku main
